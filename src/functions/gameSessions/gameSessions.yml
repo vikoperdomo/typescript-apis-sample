@@ -1,0 +1,16 @@
+searchGameSessions:
+  handler: dist/src/functions/gameSessions/search
+  events:
+    - http: true
+      route: game-sessions/search
+      methods:
+        - POST
+      authLevel: anonymous
+randomSearchGameSessions:
+  handler: dist/src/functions/gameSessions/randomSearch
+  events:
+    - http: true
+      route: game-sessions/random-search
+      methods:
+        - GET
+      authLevel: anonymous

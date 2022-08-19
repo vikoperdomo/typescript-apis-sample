@@ -1,0 +1,8 @@
+contact:
+  handler: dist/src/functions/contacts/submissionForm
+  events:
+    - http: true
+      route: contacts/submission
+      methods:
+        - POST
+      authLevel: anonymous

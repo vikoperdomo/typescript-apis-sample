@@ -1,0 +1,41 @@
+service: playfab-live-api
+
+provider:
+  name: azure
+  stage: dev
+  region: eastus
+  runtime: nodejs12
+  subscriptionId: ${env:AZURE_SUBSCRIPTION_ID}
+  resourceGroup: playfab-development
+  storageAccount:
+    name:  ${env:ACCOUNT_NAME}
+  environment:
+    COSMOS_URL: ${env:COSMOS_URL}
+    COSMOS_KEY: ${env:COSMOS_KEY}
+    COSMOS_DATABASE: ${env:COSMOS_DATABASE}
+
+cors:
+  - enabled: true
+  - origin: '*'
+  - headers: 'Cache-Control,Content-Type,Accept,Accept-Encoding'
+  - methods: 'DELETE,GET,PUT,POST'
+
+plugins:
+  - serverless-azure-functions
+  - serverless-dotenv-plugin
+configValidationMode: off
+package:
+  patterns:
+    - '!src/**'
+    - '!scripts/**'
+    - '!documentation/**'
+    - '!local.settings.json'
+    - '!.vscode/**'
+
+functions:
+  - ${file(src/functions/schedules/schedules.yml)}
+  - ${file(src/functions/users/users.yml)}
+  - ${file(src/functions/leads/leads.yml)}
+  - ${file(src/functions/gameSessions/gameSessions.yml)}
+  - ${file(src/functions/contacts/contacts.yml)}
+  - ${file(src/functions/jobs/jobs.yml)}

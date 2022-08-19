@@ -1,0 +1,6 @@
+pingServer:
+  handler: dist/src/functions/jobs/pingServer
+  events:
+    - timer: true
+      name: pingServer
+      schedule: 0 * * * * *
